@@ -17,6 +17,7 @@ Configuration
 The configuration is loaded from lambeats.conf(in the same directory as the script). The configuration data is continually updated as the program runs; therefore, the condiguration of the program can be changed without restarting it simply by editing this file.
 
 The configuration consists of three sections. Each is contained in an s-expression, with the first element being the name of the section, and the rest being the options for that section. For example
+
     (:globals (fill-size 20)
     	      (refresh-time 30))
 is the globals section, with the options (fill-size 20) and (refresh-time 30). The three sections are:
@@ -49,6 +50,7 @@ Usage
 
 Go into the lambeats folder. Launch your favorite common lisp. If you're in some ancient implementation that doesn't have asdf prepackaged, make sure it's loaded.
 Simply:
+
     (asdf:load-system :lambeats)
     (in-package :lambeats)
     (run)
@@ -58,6 +60,8 @@ Compilation
 
 If you've got ECL, you can compile lisp programs into executables. This can make execution and especially load times faster. This is especially helpful if you're on a old or otherwise slow system (I run lambeats on my raspberry pi, and foung this very useful)
 Simply append "(run)" (without the quotes) to lambeats.lisp, and do
+
     ecl -eval "(asdf:make-build :lambeats :type :program)"
+
 in the lambeats directory. This will create the executable. In my experience, the executable is saved to some location in the ecl directory (/home/pi/.cache/common-lisp/ecl-11.1.1-unknown-linux-arm/home/pi/lambeats/). Thisisn't specified anywhere in the ECL documentation that I could find, but fortunately it's printed at the end of compilation.
 
