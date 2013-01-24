@@ -1,0 +1,21 @@
+(:globals ;defining globals, ho!
+	(fill-size 10) ;set the fill-size to 10(redundant, really, that's the default)
+	(host "localhost") ;ditto
+	(port 6600) ;aand ditto
+	(refresh-time 10)) ;set the refresh time to ten seconds.
+
+(:categories 
+	(rock ("rock band" "music with rock" "sweet rock music")) ;rock is the category containing those folders.
+	(programming ("rock band" "techno beatz" "sweet rock music")) ;like above
+	(calming ("super calm music")) ;and again
+	(nothing ()) ;a category containing jack shit
+	(programming-rock (:and rock programming)) ;everything that is BOTH in rock AND in programming
+	(programming-calm (:or programming-rock calm))) ;everything that is EITHER in programming-rock OR tf2
+
+(:category-picks
+;the fancy expression here at the beginning might be confusing: it simply calculates the hour of day.
+	((< 23 (third (multiple-value-list (get-decoded-time)))) nothing) ;if the hour is past 23, add no songs
+	((< 20 (third (multiple-value-list (get-decoded-time)))) calming) ;if the hour is past 20, use calming songs
+	(t programming)) ;otherwise, use programing songs.
+
+;this is actually a pretty shitty category-picks, since it starts playing programming songs again at 00:00. But it's for demonstratory purposes.

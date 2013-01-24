@@ -1,0 +1,3 @@
+In the process of making lambeats, a few ugly hacks were made to this source code. Their uglyness made me wish keep them out of the main branch. They are:
+
+Exported defcommand and connection symbols.
