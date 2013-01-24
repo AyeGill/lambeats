@@ -3,6 +3,13 @@ Lambeats
 
 Lambeats is a simple automated mpd client written in Common Lisp. It automatically fills your playlist to a certain number of songs at a specific interval(both configurable). It allows you to define categories of folders to pick songs from, and how the script should determine which category to use. 
 
+To use it, you need quicklisp and asdf. You also need an internet connection first time you run it, so quicklisp can get the required systems.
+
+Installation
+------------
+    git clone https://github.com/AyeGill/lambeats.git
+
+Easy.
 
 Configuration
 -------------
@@ -37,4 +44,20 @@ This might be confusing: read lambeats.conf.example for an example of how this w
 Configures how the script picks categories to add songs from. Each options has two elements. The first is a lisp expression, which is evaluated as such. The second is the name of a category. The options are iterated through in order. If any option returns a non-nil value, the corresponding category is used, and the remaining options are ignored. If you don't know how to use lisp, just use the symbol t, like in the example. It always passes, so you can use it to have a default value(although, if you don't know anything about lisp, maybe this isn't the right script for you).
 
 
+Usage
+-----
+
+Go into the lambeats folder. Launch your favorite common lisp. If you're in some ancient implementation that doesn't have asdf prepackaged, make sure it's loaded.
+Simply:
+    (asdf:load-system :lambeats)
+    (in-package :lambeats)
+    (run)
+    
+Compilation
+-----------
+
+If you've got ECL, you can compile lisp programs into executables. This can make execution and especially load times faster. This is especially helpful if you're on a old or otherwise slow system (I run lambeats on my raspberry pi, and foung this very useful)
+Simply append "(run)" (without the quotes) to lambeats.lisp, and do
+    ecl -eval "(asdf:make-build :lambeats :type :program)"
+in the lambeats directory. This will create the executable. In my experience, the executable is saved to some location in the ecl directory (/home/pi/.cache/common-lisp/ecl-11.1.1-unknown-linux-arm/home/pi/lambeats/). Thisisn't specified anywhere in the ECL documentation that I could find, but fortunately it's printed at the end of compilation.
 
