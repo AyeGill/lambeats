@@ -9,13 +9,13 @@
 	(programming ("rock band" "techno beatz" "sweet rock music")) ;like above
 	(calming ("super calm music")) ;and again
 	(nothing ()) ;a category containing jack shit
-	(programming-rock (:and rock programming)) ;everything that is BOTH in rock AND in programming
-	(programming-calm (:or programming-rock calm))) ;everything that is EITHER in programming-rock OR tf2
+	(programming-rock (:and rock programming)) ;everything that is BOTH in rock AND in programming. Will contain the folders "rock band" and "sweet rock music"
+	(programming-calm (:or programming-rock calm))) ;everything that is EITHER in programming-rock OR calm. Will contain "rock band", "sweet rock music", and "super calm music"
 
 (:category-picks
 ;the fancy expression here at the beginning might be confusing: it simply calculates the hour of day.
 	((< 23 (third (multiple-value-list (get-decoded-time)))) nothing) ;if the hour is past 23, add no songs
 	((< 20 (third (multiple-value-list (get-decoded-time)))) calming) ;if the hour is past 20, use calming songs
-	(t programming)) ;otherwise, use programing songs.
+	(t programming)) ;otherwise, use programming songs.
 
 ;this is actually a pretty shitty category-picks, since it starts playing programming songs again at 00:00. But it's for demonstratory purposes.
